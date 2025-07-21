@@ -110,7 +110,3 @@ pub struct DataParams {
 | TC38          | form_validate_with_message   | application/json                  | invalid_payload | 500                | 💣❌Unexpected   | Expected `Content-Type: application/x-www-form-urlencoded`                      | Unsupported Content-Type, expected 415.                               |
 | TC39          | form_validate_with_message   | application/json                  | {}              | 500                | 💣❌Unexpected   | Expected `Content-Type: application/x-www-form-urlencoded`                      | Unsupported Content-Type, expected 415.                               |
 | TC40          | form_validate_with_message   | application/json                  | Null            | 500                | 💣❌Unexpected   | Expected `Content-Type: application/x-www-form-urlencoded`                      | Unsupported Content-Type, expected 415.                               |
-
-
-## Details
-[Uploading ValitionTest.csv…]()
