@@ -1,0 +1,94 @@
+Table 1
+✅valid_payload,"`{""name"": ""Alice"", ""email"": ""alice@example.com""}`",,,,,,
+❌invalid_payload,"`{""name"": """", ""email"": "" ""}`",,,,,,
+No.1,Method,ContentType,Playload,ActualStatusCode,Note,Log,Note
+TC01,json_validate,application/json,valid_payload,200,✅Expected,,
+TC01,—,application/json,invalid_payload,400,✅Expected,,
+TC02,—,application/json,{},422,,"2025-07-21T14:20:05.745319Z DEBUG http-request: loco_rs::controller::extractor::validate: request validation error occurred err=ValidationErrors({""name"": Field([ValidationError { code: ""length"", message: Some(""custom message""), params: {""value"": String(""""), ""min"": Number(5)} }])}) http.method=POST http.uri=/backend/validations/json_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=23ab1872-4608-491e-a70d-29496168d5f5
+2025-07-21T14:20:05.745379Z ERROR http-request: loco_rs::controller: controller_error error.msg= error.details=BadRequest("""") http.method=POST http.uri=/backend/validations/json_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=23ab1872-4608-491e-a70d-29496168d5f5",
+TC03,—,application/json,Null,400,,"2025-07-21T14:20:42.265606Z ERROR http-request: loco_rs::controller: controller_error error.msg=Failed to parse the request body as JSON: EOF while parsing a value at line 1 column 0 error.details=JsonRejection(JsonSyntaxError(JsonSyntaxError(Error { inner: Error { path: Path { segments: [] }, original: Error(""EOF while parsing a value"", line: 1, column: 0) } }))) http.method=POST http.uri=/backend/validations/json_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=540eb6c7-59ce-44ff-94d5-bba0d24d3361",
+TC04,—,application/xml,valid_payload,415,,"2025-07-21T14:35:05.244338Z ERROR http-request: loco_rs::controller: controller_error error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType)) http.method=POST http.uri=/backend/validations/json_validate_with_message http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=ed162501-111e-484a-a11f-ca644a4ddce1
+2025-07-21T14:35:05.244419Z DEBUG http-request: loco_rs::controller: json rejection err=""Expected request with `Content-Type: application/json`"" http.method=POST http.uri=/backend/validations/json_validate_with_message http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=ed162501-111e-484a-a11f-ca644a4ddce1",error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+,,application/xml,invalid_payload,415,,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+TC05,—,application/xml,{},415,,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+TC06,—,application/xml,Null,415,,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+TC07,—,"application/x-www-form-urlencoded
+
+",valid_payload,415,,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+,,"application/x-www-form-urlencoded
+
+",invalid_payload,415,,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+TC08,—,"application/x-www-form-urlencoded
+
+",{},415,,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+TC09,—,"application/x-www-form-urlencoded
+
+",Null,415,,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+TC10,json_validate_with_message,application/json,valid_payload,200,✅Expected,,error.msg=Expected request with `Content-Type: application/json` error.details=JsonRejection(MissingJsonContentType(MissingJsonContentType))
+TC11,,application/json,invalid_payload,400,✅Expected,,
+TC12,,application/json,{},422,,"2025-07-21T14:20:05.745319Z DEBUG http-request: loco_rs::controller::extractor::validate: request validation error occurred err=ValidationErrors({""name"": Field([ValidationError { code: ""length"", message: Some(""custom message""), params: {""value"": String(""""), ""min"": Number(5)} }])}) http.method=POST http.uri=/backend/validations/json_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=23ab1872-4608-491e-a70d-29496168d5f5
+2025-07-21T14:20:05.745379Z ERROR http-request: loco_rs::controller: controller_error error.msg= error.details=BadRequest("""") http.method=POST http.uri=/backend/validations/json_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=23ab1872-4608-491e-a70d-29496168d5f5",
+TC13,,application/json,Null,400,,"2025-07-21T14:20:42.265606Z ERROR http-request: loco_rs::controller: controller_error error.msg=Failed to parse the request body as JSON: EOF while parsing a value at line 1 column 0 error.details=JsonRejection(JsonSyntaxError(JsonSyntaxError(Error { inner: Error { path: Path { segments: [] }, original: Error(""EOF while parsing a value"", line: 1, column: 0) } }))) http.method=POST http.uri=/backend/validations/json_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=540eb6c7-59ce-44ff-94d5-bba0d24d3361",
+TC14,,application/xml,valid_payload,415,,"2025-07-21T14:20:42.265670Z DEBUG http-request: loco_rs::controller: json rejection err=""Failed to parse the request body as JSON: EOF while parsing a value at line 1 column 0"" http.method=POST http.uri=/backend/validations/json_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=540eb6c7-59ce-44ff-94d5-bba0d24d3361",
+TC15,,application/xml,invalid_payload,415,,,
+TC16,,application/xml,{},415,,,
+TC17,,application/xml,Null,415,,,
+TC18,,"application/x-www-form-urlencoded
+
+",valid_payload,415,,,
+TC19,,"application/x-www-form-urlencoded
+
+",invalid_payload,415,,,
+TC20,,"application/x-www-form-urlencoded
+
+",{},415,,,
+TC21,,"application/x-www-form-urlencoded
+
+",Null,415,,,
+TC22,form_validate,"application/x-www-form-urlencoded
+
+",valid_payload,200,✅Expected,,
+TC23,,"application/x-www-form-urlencoded
+
+",invalid_payload,400,✅Expected,,
+TC24,,"application/x-www-form-urlencoded
+
+",null,500,💣❌,"2025-07-21T14:32:20.917447Z ERROR http-request: loco_rs::controller: controller_error error.msg=Failed to deserialize form body: missing field `email` error.details=AxumFormRejection(FailedToDeserializeFormBody(FailedToDeserializeFormBody(Error { inner: Error { path: Path { segments: [] }, original: Error(""missing field `email`"") } }))) http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=08b0314b-6c35-4154-bac4-4809baa041c6
+2025-07-21T14:32:20.917644Z DEBUG http-request: tower_http::trace::on_response: finished processing request latency=0 ms status=500 http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=08b0314b-6c35-4154-bac4-4809baa041c6","`curl --location --request POST 'http://localhost:5150/backend/validations/form_validate' \
+--header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
+--header 'Accept: */*' \
+--header 'Host: localhost:5150' \
+--header 'Connection: keep-alive' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode ''
+`"
+TC25,,"application/x-www-form-urlencoded
+
+",{},500,💣❌,"2025-07-21T14:32:20.917447Z ERROR http-request: loco_rs::controller: controller_error error.msg=Failed to deserialize form body: missing field `email` error.details=AxumFormRejection(FailedToDeserializeFormBody(FailedToDeserializeFormBody(Error { inner: Error { path: Path { segments: [] }, original: Error(""missing field `email`"") } }))) http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=08b0314b-6c35-4154-bac4-4809baa041c6
+2025-07-21T14:32:20.917644Z DEBUG http-request: tower_http::trace::on_response: finished processing request latency=0 ms status=500 http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=08b0314b-6c35-4154-bac4-4809baa041c6","Failed to deserialize form body: missing field `name` error.details=AxumFormRejection(FailedToDeserializeFormBody(FailedToDeserializeFormBody(Error { inner: Error { path: Path { segments: [] }, original: Error(""missing field `name`"") } }))) "
+TC26,,"application/json
+",valid_payload,200,💣❌,"2025-07-21T14:33:12.530754Z DEBUG http-request: tower_http::trace::on_request: started processing request http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=d15a79d0-1bb1-4d6f-845f-d7583321d17d
+2025-07-21T14:33:12.530908Z ERROR http-request: loco_rs::controller: controller_error error.msg=Form requests must have `Content-Type: application/x-www-form-urlencoded` error.details=AxumFormRejection(InvalidFormContentType(InvalidFormContentType)) http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=d15a79d0-1bb1-4d6f-845f-d7583321d17d
+2025-07-21T14:33:12.531013Z DEBUG http-request: tower_http::trace::on_response: finished processing request latency=0 ms status=500 http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=d15a79d0-1bb1-4d6f-845f-d7583321d17d
+2025-07-21T14:33:12.531044Z ERROR http-request: tower_http::trace::on_failure: response failed classification=Status code: 500 Internal Server Error latency=0 ms http.method=POST http.uri=/backend/validations/form_validate http.version=HTTP/1.1 http.user_agent=Apifox/1.0.0 (https://apifox.com) environment=development request_id=d15a79d0-1bb1-4d6f-845f-d7583321d17d",Form requests must have `Content-Type: application/x-www-form-urlencoded`
+,,"application/json
+",invalid_payload,400,💣❌,,Form requests must have `Content-Type: application/x-www-form-urlencoded`
+,,"application/json
+",null,500,💣❌,,Form requests must have `Content-Type: application/x-www-form-urlencoded`
+,,"application/json
+",{},500,💣❌,,Form requests must have `Content-Type: application/x-www-form-urlencoded`
+,,"application/json
+",,,,,Form requests must have `Content-Type: application/x-www-form-urlencoded`
+,form_validate,"application/x-www-form-urlencoded
+
+",valid_payload,200,✅Expected,,Form requests must have `Content-Type: application/x-www-form-urlencoded`
+,,"application/x-www-form-urlencoded
+
+",invalid_payload,400,✅Expected,,
+,,"application/x-www-form-urlencoded
+
+",null,500,💣❌,,
+,,"application/x-www-form-urlencoded
+
+",{},500,💣❌,,
+,,No need to test-cause only support content-type,,,,,
